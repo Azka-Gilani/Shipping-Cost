@@ -32,18 +32,43 @@ def makeWebhookResult(req):
         return {}
     result = req.get("result")
     parameters = result.get("parameters")
-    zone = parameters.get("shipping-zone")
+    zone = parameters.get("location")
+    
 
-    cost = {'Europe':100, 'North America':200, 'South America':300, 'Asia':400, 'Africa':500}
+    #cost = {'Europe':100, 'North America':200, 'South America':300, 'Asia':400, 'Africa':500}
 
-    speech = "The cost of shipping to " + zone + " is " + str(cost[zone]) + " euros."
-
+    #speech = "The cost of shipping to " + zone + " is " + str(cost[zone]) + " euros."
+    speech1= "AARz.pk"
     print("Response:")
     print(speech)
+     facebook_message = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": query.get('title'),
+                        "image_url":"http://blogs-images.forbes.com/vanessagrout/files/2015/03/shutterstock_130356110.jpg",
+                        "subtitle": speech1,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": "http://www.aarz.pk/search?purpose=Sell&postedby=homepage&property_type=&locAreaOrKeyword="+zone,
+                                "title": "View Details"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+
 
     return {
         "speech": speech,
         "displayText": speech,
+        "data": {"facebook": facebook_message},
         #"data": {},
         # "contextOut": [],
         "source": "apiai-onlinestore-shipping"
