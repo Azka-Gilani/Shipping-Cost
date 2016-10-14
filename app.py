@@ -48,7 +48,7 @@ def makeWebhookResult(req):
                 "template_type": "generic",
                 "elements": [
                     {
-                        "title": query.get('title'),
+                        "title": "www.aarz.pk",
                         "image_url":"http://blogs-images.forbes.com/vanessagrout/files/2015/03/shutterstock_130356110.jpg",
                         "subtitle": speech1,
                         "buttons": [
