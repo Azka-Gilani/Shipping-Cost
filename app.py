@@ -40,11 +40,36 @@ def makeWebhookResult(req):
 
     print("Response:")
     print(speech)
+    facebook_message = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": zone,
+                        "image_url": "http://blogs-images.forbes.com/vanessagrout/files/2015/03/shutterstock_130356110.jpg",
+                        "subtitle": speech,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": "www.aarzpk.com"+zone,
+                                "title": "View Details"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+
+    print(json.dumps(facebook_message))
+
 
     return {
         "speech": speech,
         "displayText": zone,
-        #"data": {},
+        "data": {"facebook": facebook_message},
         # "contextOut": [],
         "source": "apiai-onlinestore-shipping"
     }
